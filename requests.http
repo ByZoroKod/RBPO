@@ -1,0 +1,94 @@
+@host = http://localhost:8080
+
+### Создать пользователя
+POST {{host}}/api/users
+Content-Type: application/json
+
+{
+  "name": "Иван",
+  "email": "ivan@mail.ru"
+}
+
+### Список пользователей
+GET {{host}}/api/users
+
+### Пользователь по id
+GET {{host}}/api/users/1
+
+### Создать коллекционный предмет
+POST {{host}}/api/collectible-items
+Content-Type: application/json
+
+{
+  "description": "Монета 1900 года",
+  "ownerId": 1,
+  "condition": "хорошее"
+}
+
+### Создать аукционный лот
+POST {{host}}/api/auction-lots
+Content-Type: application/json
+
+{
+  "itemId": 1,
+  "startPrice": 100,
+  "step": 10
+}
+
+### Сделать ставку
+POST {{host}}/api/bids
+Content-Type: application/json
+
+{
+  "lotId": 1,
+  "bidderId": 1,
+  "amount": 110
+}
+
+### Ставка ниже минимума
+POST {{host}}/api/bids
+Content-Type: application/json
+
+{
+  "lotId": 1,
+  "bidderId": 1,
+  "amount": 5
+}
+
+### Заключить сделку по лоту
+POST {{host}}/api/auction-deals
+Content-Type: application/json
+
+{
+  "lotId": 1,
+  "winningBidId": 1
+}
+
+### Обновить статус передачи
+PATCH {{host}}/api/auction-deals/1
+Content-Type: application/json
+
+{
+  "transferStatus": "TRANSFERRED"
+}
+
+### Проверить лот
+GET {{host}}/api/auction-lots/1
+
+### Несуществующий ресурс
+GET {{host}}/api/users/999
+
+### Удалить пользователя
+DELETE {{host}}/api/users/1
+
+### Коллекционные предметы
+GET {{host}}/api/collectible-items
+
+### Аукционные лоты
+GET {{host}}/api/auction-lots
+
+### Ставки
+GET {{host}}/api/bids
+
+### Сделки
+GET {{host}}/api/auction-deals
